@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  habiApiCreateUrl: 'http://localhost:3000/api/',
+  habiApiGetUrl: 'http://localhost:3001/api/',
+  habiApiDeleteUrl: 'http://localhost:3002/api/',
 };
 
 /*

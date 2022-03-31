@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +19,11 @@ import { ApartmentsModule } from './apartments/apartments.module';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ApartmentsModule
+    HttpClientModule,
+    ApartmentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
