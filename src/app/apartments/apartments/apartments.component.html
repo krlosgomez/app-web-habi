@@ -17,6 +17,40 @@
     </div>
     <!-- Table -->
     <div style="min-height: 80%;" class="max-w-full">
+
+      <!-- Filters -->
+      <form class="flex flex-row mb-3">
+        <!-- Location -->
+        <div class="flex flex-col w-1/6">
+          <label for="location" class="text-sm mb-1">* Localidad:</label>
+          <input type="text" name="location" [(ngModel)]="filters.location"
+            class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 focus:border-purple-600 border-2">
+        </div>
+        <!-- Created at -->
+        <div class="flex flex-col w-1/6 ml-3">
+          <label for="created-at" class="text-sm mb-1">* Fecha de creación:</label>
+          <input type="date" name="created-at" [(ngModel)]="filters.created_at"
+            class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 focus:border-purple-600 border-2">
+        </div>
+        <!-- Button search -->
+        <div class="flex flex-col w-1/12 ml-3 mt-auto">
+          <button class="px-3 bg-purple-800 rounded-md text-white font-bold" (click)="getApartments()">Filtrar</button>
+        </div>
+        <!-- Order -->
+        <div class="float-right ml-auto mt-auto">
+          <select
+            class="bg-gray-100 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 focus:border-purple-600 border-2"
+            name="order" id="order" [(ngModel)]="filters.order" (ngModelChange)="getApartments()">
+            <ng-container *ngFor=" let order of orderOptions">
+              <option [ngValue]="order.value" class="flex justify-between">
+                <span>{{order.label}} </span>
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </form>
+      <!-- End filters -->
+
       <!-- Loading -->
       <span class="flex h-5 w-5 relative mx-auto" *ngIf="isLoadingPage; else showTable">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-800 opacity-75"></span>
@@ -35,25 +69,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="isLoadingData; else showData">
-              <td colspan="5">
-                <span class="flex h-5 w-5 relative mx-auto">
-                  <span
-                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-800 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-5 w-5 bg-habi"></span>
-                </span>
+            <tr *ngFor="let apartment of apartments" class="text-center">
+              <td class="border border-slate-700">{{apartment.area}} m<sup>2</sup></td>
+              <td class="border border-slate-700">{{apartment.number_rooms}}</td>
+              <td class="border border-slate-700">{{apartment.price | currency}}</td>
+              <td class="border border-slate-700">{{apartment.address}} - {{apartment.location}} - {{apartment.city}}
               </td>
+              <td class="border border-slate-700">{{apartment.owner?.name}}</td>
             </tr>
-            <ng-template #showData>
-              <tr *ngFor="let apartment of apartments" class="text-center">
-                <td class="border border-slate-700">{{apartment.area}} m<sup>2</sup></td>
-                <td class="border border-slate-700">{{apartment.number_rooms}}</td>
-                <td class="border border-slate-700">{{apartment.price | currency}}</td>
-                <td class="border border-slate-700">{{apartment.address}} - {{apartment.location}} - {{apartment.city}}
-                </td>
-                <td class="border border-slate-700">{{apartment.owner?.name}}</td>
-              </tr>
-            </ng-template>
           </tbody>
         </table>
       </ng-template>

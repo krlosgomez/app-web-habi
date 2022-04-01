@@ -46,3 +46,8 @@ export interface Owner {
   countryCode: string;
   email: string;
 }
+
+export interface FilterOrder {
+  label: string;
+  value: 'ASC' | 'DESC'
+};

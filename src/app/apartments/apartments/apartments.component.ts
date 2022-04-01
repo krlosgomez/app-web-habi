@@ -1,4 +1,4 @@
-import { GetApartmentsResponseModel } from './../models/apartments';
+import { FilterOrder, GetApartmentsResponseModel } from './../models/apartments';
 import { ApartmentServiceService } from './../services/apartment-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ApartmentResponseModel, FiltersApartmentsModel } from '../models/apartments';
@@ -17,14 +17,25 @@ export class ApartmentsComponent implements OnInit {
   filters: FiltersApartmentsModel;
 
   pagesToShow: number[];
+  orderOptions: FilterOrder[];
 
   constructor(private apartmentServiceService: ApartmentServiceService) {
     this.isLoadingPage = true;
     this.isLoadingData = false;
     this.apartments = [];
     this.apartmentsResponse = {} as GetApartmentsResponseModel;
-    this.filters = { page: 1 } as FiltersApartmentsModel;
+    this.filters = { page: 1, order: 'DESC' } as FiltersApartmentsModel;
     this.pagesToShow = new Array(1);
+    this.orderOptions = [
+      {
+        label: 'Ascendente',
+        value: 'ASC'
+      },
+      {
+        label: 'Descendente',
+        value: 'DESC'
+      }
+    ];
   }
 
   ngOnInit(): void {
@@ -35,13 +46,11 @@ export class ApartmentsComponent implements OnInit {
     this.apartmentServiceService.getApartments(this.filters).subscribe(response => {
       this.apartmentsResponse = response;
       this.apartments = this.apartmentsResponse.apartments;
-      if (this.apartmentsResponse.pages >= 3) {
-        this.pagesToShow = [this.filters.page, this.filters.page + 1, this.filters.page + 2];
-      } else if (this.apartmentsResponse.pages === 2) {
-        this.pagesToShow = [1, 2];
-      } else {
-        this.pagesToShow = [1];
+      const pagesToShow = [];
+      for (let i = 0; i < this.apartmentsResponse.pages; i++) {
+        pagesToShow.push(i + 1);
       }
+      this.pagesToShow = pagesToShow;
       this.isLoadingPage = false;
       this.isLoadingData = false;
     }, () => {

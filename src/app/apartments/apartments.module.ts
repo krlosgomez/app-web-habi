@@ -7,7 +7,7 @@ import { ApartmentsRoutingModule } from './apartments-routing.module';
 /* Components */
 import { ApartmentsComponent } from './apartments/apartments.component';
 import { CreateApartmentComponent } from './create-apartment/create-apartment.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) | null = null;
 
@@ -19,6 +19,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) | null = null;
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     NgxMaskModule.forRoot(),
     ApartmentsRoutingModule
   ]
