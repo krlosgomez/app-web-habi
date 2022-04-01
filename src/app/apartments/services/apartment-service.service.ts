@@ -45,4 +45,8 @@ export class ApartmentServiceService {
     return this.http.post<ApartmentResponseModel>(this.habiApiCreateUrl + 'apartments/array', apartmentsDto);
   }
 
+  deleteApartment(idApartment: string): Observable<any> {
+    return this.http.delete(this.habiApiDeleteUrl + 'apartments/' + idApartment);
+  }
+
 }

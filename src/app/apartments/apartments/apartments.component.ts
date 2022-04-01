@@ -2,6 +2,7 @@ import { FilterOrder, GetApartmentsResponseModel } from './../models/apartments'
 import { ApartmentServiceService } from './../services/apartment-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ApartmentResponseModel, FiltersApartmentsModel } from '../models/apartments';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-apartments',
@@ -19,7 +20,10 @@ export class ApartmentsComponent implements OnInit {
   pagesToShow: number[];
   orderOptions: FilterOrder[];
 
-  constructor(private apartmentServiceService: ApartmentServiceService) {
+  constructor(
+    private apartmentServiceService: ApartmentServiceService,
+    private toastr: ToastrService
+  ) {
     this.isLoadingPage = true;
     this.isLoadingData = false;
     this.apartments = [];
@@ -63,6 +67,16 @@ export class ApartmentsComponent implements OnInit {
     this.isLoadingData = true;
     this.filters.page = page;
     this.getApartments();
+  }
+
+  confirmRemoveApartment(id: string, index: number): void {
+    const isConfirm = confirm('¿Desea eliminar el apartamento?');
+    if (isConfirm) {
+      this.apartmentServiceService.deleteApartment(id).subscribe(data => {
+        this.toastr.success('!Apartamento eliminado con éxito!', 'Apartamentos eliminado!');
+        this.apartments.splice(index, 1);
+      });
+    }
   }
 
 }
