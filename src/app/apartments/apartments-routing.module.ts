@@ -1,3 +1,4 @@
+import { CreateApartmentComponent } from './create-apartment/create-apartment.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 /* Components */
@@ -10,6 +11,10 @@ const routes: Routes = [
       {
         path: '',
         component: ApartmentsComponent
+      },
+      {
+        path: 'create',
+        component: CreateApartmentComponent
       }
     ]
   }

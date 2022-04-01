@@ -29,5 +29,20 @@ export interface ApartmentResponseModel {
 };
 
 export interface ApartmentCreateModel {
-
+  id: string;
+  area: number;
+  number_rooms: number;
+  price: number;
+  address: string;
+  location: string;
+  city: string;
+  owner: Owner;
 };
+
+export interface Owner {
+  id: string;
+  name: string;
+  phone: string;
+  countryCode: string;
+  email: string;
+}

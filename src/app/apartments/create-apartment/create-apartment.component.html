@@ -1,0 +1,278 @@
+<div class="flex w-full justify-center px-1 pb-5">
+  <div class="container w-full">
+
+    <!-- Header -->
+    <div class="py-5 px-3 bg-habi rounded-sm my-3 flex-row flex">
+      <!-- Back button -->
+      <a class="flex-row flex bg-white px-1 rounded-full items-center text-purple-800 mr-3 tooltip" routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+            clip-rule="evenodd" />
+        </svg>
+        <span class="tooltiptext">Volver</span>
+      </a>
+      <!-- Title -->
+      <h1 class="text-xl font-bold text-white">Crear apartamento(s)</h1>
+    </div>
+
+    <!-- Apartment form -->
+    <form class="my-5 mt-6" [formGroup]="apartmentFormGroup">
+      <h1 class="text-lg mb-3">Información del apartamento:</h1>
+      <div class="grid grid-cols-2 gap-4">
+        <!-- area -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for="area" class="text-sm mb-1">* Area m<sup>2</sup> :</label>
+            <input type="text" formControlName="area" name="area"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['area'].touched && apartmentFormGroup.controls['area'].invalid}"
+              mask="separator.0" thousandSeparator=".">
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['area'].touched && apartmentFormGroup.controls['area'].hasError('required'))">
+              El area es requerida.
+            </span>
+          </div>
+        </div>
+        <!-- end area -->
+        <!-- Number rooms -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for="number-rooms">* Número de habitaciones:</label>
+            <select
+              class="bg-gray-100 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['numberRooms'].touched && apartmentFormGroup.controls['numberRooms'].invalid}"
+              name="number-rooms" id="number-rooms" formControlName="numberRooms">
+              <ng-container *ngFor="let numberRoom of numberRoomsOptions; let i = index">
+                <option [ngValue]="i + 1" class="flex justify-between">
+                  {{i + 1}}
+                </option>
+              </ng-container>
+            </select>
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['numberRooms'].touched && apartmentFormGroup.controls['numberRooms'].hasError('required'))">
+              El número de habitaciones es requerido.
+            </span>
+          </div>
+        </div>
+        <!-- end Number rooms -->
+        <!-- price -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Precio:</label>
+            <input type="text" formControlName="price" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['price'].touched && apartmentFormGroup.controls['price'].invalid}"
+              mask="separator.0" thousandSeparator="." prefix="$ ">
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['price'].touched && apartmentFormGroup.controls['price'].hasError('required'))">
+              El precio es requerido.
+            </span>
+          </div>
+        </div>
+        <!-- end price -->
+        <!-- Address -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Dirección:</label>
+            <input type="text" formControlName="address" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['address'].touched && apartmentFormGroup.controls['address'].invalid}">
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['address'].touched && apartmentFormGroup.controls['address'].hasError('required'))">
+              La dirección es requerida.
+            </span>
+          </div>
+        </div>
+        <!-- end Address -->
+        <!-- Location -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Localidad:</label>
+            <input type="text" formControlName="location" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['location'].touched && apartmentFormGroup.controls['location'].invalid}">
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['location'].touched && apartmentFormGroup.controls['location'].hasError('required'))">
+              La localidad es requerida.
+            </span>
+          </div>
+        </div>
+        <!-- end Location -->
+        <!-- City -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Ciudad:</label>
+            <input type="text" formControlName="city" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': apartmentFormGroup.controls['city'].touched && apartmentFormGroup.controls['city'].invalid}">
+            <span class="text-xs text-red-500"
+              [hidden]="!(apartmentFormGroup.controls['city'].touched && apartmentFormGroup.controls['city'].hasError('required'))">
+              La ciudad es requerida.
+            </span>
+          </div>
+        </div>
+        <!-- end City -->
+      </div>
+    </form>
+    <!-- end Apartment form -->
+
+    <!-- Owner form -->
+    <form class="my-5" [formGroup]="ownerFormGroup">
+      <h1 class="text-lg mb-3">Información del dueño:</h1>
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Name -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Nombre:</label>
+            <input type="text" formControlName="name" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': ownerFormGroup.controls['name'].touched && ownerFormGroup.controls['name'].invalid}"
+              minlength="3" maxlength="200">
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['name'].touched && ownerFormGroup.controls['name'].hasError('required'))">
+              El nombre es requerido
+            </span>
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['name'].touched && ownerFormGroup.controls['name'].hasError('minlength'))">
+              El nombre es muy corto, mínimo 3 caracteres.
+            </span>
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['name'].touched && ownerFormGroup.controls['name'].hasError('maxlength'))">
+              El nombre es muy largo, máximo 200 caracteres.
+            </span>
+          </div>
+        </div>
+        <!-- end name -->
+        <!-- Email -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" email-name" class="text-sm mb-1">* Correo:</label>
+            <input type="email" formControlName="email" name="email-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': ownerFormGroup.controls['email'].touched && ownerFormGroup.controls['email'].invalid}">
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['email'].touched && ownerFormGroup.controls['email'].hasError('required'))">
+              El email es requerido
+            </span>
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['email'].touched && ownerFormGroup.controls['email'].hasError('email'))">
+              El email es incorrecto.
+            </span>
+          </div>
+        </div>
+        <!-- end Email -->
+        <!-- Country -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for="country">* País:</label>
+            <select
+              class="bg-gray-100 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': countryFormControl.touched && countryFormControl.hasError('required')}"
+              name="country" id="country" [formControl]="countryFormControl" (ngModelChange)="changeCountrySelected()">
+              <ng-container *ngFor="let country of countries">
+                <option [ngValue]="country" class="flex justify-between" *ngIf="country.idd.root">
+                  <span>{{country.name.common}} </span>
+                  <span>
+                    {{country.idd.root +
+                    (country.idd.suffixes && country.idd.suffixes.length? country.idd.suffixes[0].toString() : '')
+                    }}
+                  </span>
+                </option>
+              </ng-container>
+            </select>
+            <span class="text-xs text-red-500"
+              [hidden]="!(countryFormControl.touched && countryFormControl.hasError('required'))">
+              El país es requerido.
+            </span>
+          </div>
+        </div>
+        <!-- end Country -->
+        <!-- Phone -->
+        <div class="flex flex-col w-12/12 h-16">
+          <div class="flex flex-col w-12/12">
+            <label for=" owner-name" class="text-sm mb-1">* Telefono:</label>
+            <input type="text" formControlName="phone" name="owner-name"
+              class="bg-gray-200 rounded-md focus:ring-brand focus:outline-none focus:border-brand px-2 py-2 focus:border-purple-600 border-2"
+              [ngClass]="{'border-solid border-red-500 outline-red-500': ownerFormGroup.controls['phone'].touched && ownerFormGroup.controls['phone'].invalid}"
+              placeholder="+000 (000) 000-0000" [mask]="' (000) 000-0000'" [prefix]="countryPrefix"
+              [showMaskTyped]="true">
+            <span class="text-xs text-red-500"
+              [hidden]="!(ownerFormGroup.controls['phone'].touched && ownerFormGroup.controls['phone'].hasError('required'))">
+              El telefono es requerido.
+            </span>
+          </div>
+        </div>
+        <!-- end Phone -->
+      </div>
+    </form>
+    <!-- end owner form -->
+
+    <!-- Add button -->
+    <div class="flex justify-center mt-10">
+      <button class="py-2 px-5 bg-purple-800 text-white rounded-md text-xl font-bold disabled:bg-purple-200"
+        [disabled]="ownerFormGroup.invalid || apartmentFormGroup.invalid || countryFormControl.invalid"
+        (click)="addCreateApartment()">
+        Agregar
+      </button>
+    </div>
+
+    <!-- List apartments to create -->
+    <h1 class="text-lg my-5 font-bold text-purple-800">Listado de usuarios a crear: </h1>
+    <table class="table-auto w-full border-collapse border border-slate-500 hover:border-collapse">
+      <thead>
+        <tr>
+          <th class="border border-slate-600">Area m<sup>2</sup></th>
+          <th class="border border-slate-600"># Habitaciones</th>
+          <th class="border border-slate-600">Presio</th>
+          <th class="border border-slate-600">Dirección</th>
+          <th class="border border-slate-600">Dueño</th>
+          <th class="border border-slate-600">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let apartment of createApartments; let i = index" class="text-center">
+          <td class="border border-slate-700">{{apartment.area}}</td>
+          <td class="border border-slate-700">{{apartment.number_rooms}}</td>
+          <td class="border border-slate-700">{{apartment.price | currency}}</td>
+          <td class="border border-slate-700">{{apartment.address}} - {{apartment.location}} - {{apartment.city}}
+          </td>
+          <td class="border border-slate-700">{{apartment.owner?.name}}</td>
+          <td class="border border-slate-700">
+            <div class="flex flex-col">
+              <!-- <button class="tooltip">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-full fill-purple-800" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                  <path fill-rule="evenodd"
+                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="text-xs">Editar</span>
+                <span class="tooltiptext">Editar Apartamento</span>
+              </button> -->
+              <button class="tooltip" (click)="confirmRemoveApartment(i)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-full fill-red-700" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd" />
+                </svg>
+                <span class="text-xs">Eliminar</span>
+                <span class="tooltiptext">Eliminar Apartamento</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Create button -->
+    <div class="flex justify-center mt-10">
+      <button class="py-2 px-5 bg-purple-800 text-white rounded-md text-xl font-bold disabled:bg-purple-200"
+        [disabled]="createApartments.length === 0" (click)="_createApartments()">
+        Crear Apartamentos
+      </button>
+    </div>
+
+  </div>
+</div>

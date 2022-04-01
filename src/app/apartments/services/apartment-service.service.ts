@@ -1,8 +1,9 @@
+import { ApartmentCreateModel } from './../models/apartments';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FiltersApartmentsModel, GetApartmentsResponseModel } from '../models/apartments';
+import { ApartmentResponseModel, FiltersApartmentsModel, GetApartmentsResponseModel } from '../models/apartments';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,14 @@ export class ApartmentServiceService {
       query += '&created_at=' + filtersApartments.created_at;
     }
     return this.http.get<GetApartmentsResponseModel>(this.habiApiGetUrl + 'apartments' + query);
+  }
+
+  createApartment(apartmentCreate: ApartmentCreateModel): Observable<ApartmentResponseModel> {
+    return this.http.post<ApartmentResponseModel>(this.habiApiCreateUrl + 'apartments', apartmentCreate);
+  }
+
+  createApartments(apartmentsDto: { apartmentsDto: ApartmentCreateModel[] }): Observable<ApartmentResponseModel> {
+    return this.http.post<ApartmentResponseModel>(this.habiApiCreateUrl + 'apartments/array', apartmentsDto);
   }
 
 }

@@ -1,11 +1,22 @@
 <div class="flex w-full justify-center">
   <div class="container w-full">
     <!-- Header -->
-    <div class="py-5 px-3 bg-habi rounded-sm my-3">
+    <div class="py-5 px-3 bg-habi rounded-sm my-3 flex-row flex">
       <h1 class="text-xl font-bold text-white">Apartamentos</h1>
+      <!-- Create button -->
+      <a class="ml-auto flex-row flex bg-white px-3 rounded-md items-center text-purple-800 tooltip"
+        routerLink="create">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+            clip-rule="evenodd" />
+        </svg>
+        <span class="font-bold">Crear</span>
+        <span class="tooltiptext">Crear Apartamento</span>
+      </a>
     </div>
     <!-- Table -->
-    <div class="h-80">
+    <div style="min-height: 80%;" class="max-w-full">
       <!-- Loading -->
       <span class="flex h-5 w-5 relative mx-auto" *ngIf="isLoadingPage; else showTable">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-800 opacity-75"></span>
@@ -17,7 +28,7 @@
           <thead>
             <tr>
               <th class="border border-slate-600">Area</th>
-              <th class="border border-slate-600">Número de Habitaciones</th>
+              <th class="border border-slate-600"># Habitaciones</th>
               <th class="border border-slate-600">Presio</th>
               <th class="border border-slate-600">Dirección</th>
               <th class="border border-slate-600">Dueño</th>
